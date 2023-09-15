@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb18030">
+    <meta name="keywords"
+        content="mate365, ecuaciones lineales, ejercicios, fracciones, matematicas, primer grado, incognita, ejercicios interactivos, forma ax + b = c ">
+    <meta name="description" content="Aplicacion interactiva para entender las ecuaciones lineales de la forma ax+b=c">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache">
+    <link rel="shortcut icon" href="img/logo1.png">
+    <script src="libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/checked.js"></script>
+    <script src="css/wow.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Arima+Madurai|Lato|Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <script>
+        new WOW().init()
+    </script>
+    <style>
+        body {
+            background: rgba(255, 255, 255, 1);
+        }
+    </style>
+    <title>Mate365</title>
+</head>
+<body>
+    <div class="contenedor">
+        <img src='img/logo2.png'>
+        <h2 id="intro" class="titulo">Resolución de ecuaciones cuadráticas<br>o de segundo grado de la forma
+            general:<br>ax<sup>2</sup> + bx = 0<br></h2>
+        <h3 class="descripcion" style="font-size:1.1em;">Nivel 6</h3>
+        <h3 class="descripcion">La expresión algebraica en la ecuación cuadrática es de la forma<br><span
+                class='cursiva'>ax<sup>2</sup> + bx</span><br><br>
+            por <span class='cursiva'><em>factorización.</em></span class='cursiva'><br><br>
+            <span class='cursiva'>a,&nbsp;b &ne; 0&nbsp;&nbsp; ;&nbsp;&nbsp;&nbsp; c = 0
+                &nbsp;&nbsp;a, b, c</span>&nbsp;&nbsp;&nbsp;son números enteros,&nbsp;&nbsp; Z = (... -3, -2, -1, 0, +1,
+            +2, +3 ...)
+        </h3>
+        <hr class="border">
+        <div class="contenido">
+            <section class="niveles">
+                <form action="#" method="POST" class="formulario" onsubmit="return validar();" autocomplete="off">
+                    <p>
+                        <script src="temas/functions/functions.js"></script>
+                        <script src="temas/functions/MCD.js"></script>
+                        <script src="temas/functions/validaciones.js"></script>
+                        <script src="temas/functions/textos.js"></script>
+                        <script src="temas/functions/operaciones.js"></script>
+                        <script type="text/javascript">
+                            function validar() {
+                                $("#aviso").hide(8000);
+                                a = document.getElementById("a").value;
+                                b = document.getElementById("b").value;
+                                a = parseInt(a);
+                                b = parseInt(b);
+                                flag = filtro_entero(a, b) == true ? rango_entero(a, b) : text_fail();
+                                flag == true ? flag = 'ok' : text_fail();
+                                if (flag == 'ok') {
+                                    flag = "";
+                                    r1 = "<br>la ecuación cuadrática a resolver es:<br>"
+                                    if (b < 0) {
+                                        signo = "<span class='rojo'> - </span>"
+                                        banderaB = -1
+                                    } else {
+                                        signo = "<span class='rojo'> + </span>"
+                                        banderaB = 1
+                                    }
+                                    if (b < 0) { b1 = b * (-1) } else { b1 = parseInt(b) }
+                                    r1 = r1 + "<span class='ecuacion' align='center'>" + a + " x<sup>2</sup> <span class='rojo'>" + signo + "</span>" + b1 + ""
+                                    r1 = r1 + " x <span class='rojo'> = </span> 0</span>"
+                                    r1 = r1 + "<br>Observamos que:<br><br>"
+                                    r1 = r1 + "<span class='strong'><span class='green'>a</span> <span class='rojo'> = </span>" + a + ", <span class='blue'>b</span> <span class='rojo'> = </span>" + b + "</span>&nbsp;&nbsp; y &nbsp;&nbsp;<span class='strong'><span class='rojo'>c</strong></span> <span class='rojo'> = </span> 0</span>"
+                                    r1 = r1 + "<br><br>así que debemos factorizar la expresión del primer miembro de la ecuación obteniendo a uno de los factores como: <span class='strong'>factor común.</span>"
+                                    /*MCD++++++++++++++++++++++++++*/
+                                    valor1 = a;
+                                    valor2 = b;
+                                    valor1 = Math.abs(valor1);
+                                    valor2 = Math.abs(valor2);
+                                    maximocd = MCD(valor1, valor2);
+                                    /*++++++++++++++++++++++++++MCD*/
+                                    r1 = r1 + "<br><br>Los elementos del factor común se obtienen:  por un lado para los coeficientes <br><br><span class='green strong'>a</span> y <span class='blue strong'>b</span>, &nbsp;&nbsp;"
+                                    r1 = r1 + "<span class='strong'>MCD (<span class='green'>"
+                                    if (a < 0) { r1 = r1 + "" + a * (-1) + "" } else { r1 = r1 + "" + a + "" }
+                                    r1 = r1 + "</span>, <span class='blue'>"
+                                    if (b < 0) { r1 = r1 + "" + b * (-1) + "" } else { r1 = r1 + "" + b + "" }
+                                    r1 = r1 + "</span>) = " + maximocd + "</span> <br><br>y por otro lado en las parte literal el elemento del factor común es : <span class='strong'>x</span>, en consecuencia  el factor común es: <span class='strong'>"
+                                    /*--------------------------------------------------------------------------------------------------------*/
+                                    r1 = r1 + maximocd + "x.</span>"
+                                    r1 = r1 + "<br>El otro factor se obtiene dividiendo cada término de la expresión ax <sup>2</sup> + bx entre el factor común:"
+                                    productoA = a / maximocd
+                                    productoB = b / maximocd
+                                    /*-----------------------------------------------------------------parte 1 -----------------------------------------------*/
+                                    r1 = r1 + "<center><table class='tableecu'><tr><td class='Aright'>"
+                                    r1 = r1 + "<div class='fraction'><span class='fup'>" + a + " x<sup>2</sup></span><span class='bar'></span><span class='fdn'>" + maximocd + " x</span></div>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>"
+                                    if (productoA == 1) { r1 = r1 + "x" } else if (productoA == -1) { r1 = r1 + "-x" } else { r1 = r1 + "" + productoA + " x" }
+                                    r1 = r1 + "</td></tr>"
+                                    /*-----------------------------------------------------------------parte 2 -----------------------------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>"
+                                    r1 = r1 + "<div class='fraction'><span class='fup'>" + b + " x</span><span class='bar'></span><span class='fdn'>" + maximocd + " x</span></div>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>"
+                                    r1 = r1 + "" + productoB + ""
+                                    r1 = r1 + "</td></tr>"
+                                    r1 = r1 + "</table>"
+                                    /*-----------------------------------------------*/
+                                    r1 = r1 + "Así que:"
+                                    r1 = r1 + "<center><table class='tableecu'>"
+                                    /*-----------------------------------------------------------------paso 1 -----------------------------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>" + a + " x<sup>2</sup>"
+                                    r1 = r1 + "<span class='rojo'>" + signo + "</span>" + b1 + ""
+                                    r1 = r1 + " x</td><td><span class='rojo'> = </span></td><td class = 'Aleft'> 0 </td></tr>"
+                                    r1 = r1 + "</table>"
+                                    /*-----------------------------------------------*/
+                                    r1 = r1 + "<br>resulta:<br>"
+                                    r1 = r1 + "<center><table class='tableecu'>"
+                                    /*-----------------------------------------------------------------paso 2 -----------------------------------------------*/
+                                    if (banderaB < 0) { signo1 = "<span class='rojo'> - </span>" } else { signo1 = "<span class='rojo'> + </span>" }
+                                    if (banderaB < 0) { signo2 = "<span class='rojo'> + </span>" } else { signo2 = "<span class='rojo'> - </span>" }
+                                    if (productoB < 0) { productoB1 = productoB * (-1) } else { productoB1 = parseInt(productoB) }
+                                    r1 = r1 + "<tr><td class='Aright'>" + maximocd + " x "
+                                    r1 = r1 + "("
+                                    if (productoA == 1) { r1 = r1 + "x" } else if (productoA == -1) { r1 = r1 + "-x" } else { r1 = r1 + "" + productoA + " x" }
+                                    r1 = r1 + "<span class='rojo'>" + signo1 + "</span>" + productoB1 + ")"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'> 0 </td></tr>"
+                                    r1 = r1 + "</table>"
+                                    r1 = r1 + "Aplicando la propiedad de los números :<br>“ Si el producto de 2 números es cero , entonces se cumple que uno de los dos números es cero o ambos  ”, entonces:"
+                                    r1 = r1 + "<br><br>"
+                                    r1 = r1 + "<span class='izquierda'>Para <span class='strong'> x<sub>1</sub> :</span></span>"
+                                    r1 = r1 + "<br><br>"
+                                    //----------------------------------------> 1 parte
+                                    r1 = r1 + "<center><table class='tableecu'>"
+                                    /*-----------------------------------------------------------------paso 1 -----------------------------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>" + maximocd + " x"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "</td></tr>"
+                                    /*-----------------------------------------------------------------paso 2 -----------------------------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'><div class='fraction'><span class='fup'>" + maximocd + " x</span><span class='bar'></span><span class='fdn blue'>" + maximocd + "</span></div>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction'><span class='fup'>" + 0 + "</span><span class='bar'></span><span class='fdn blue'>" + maximocd + "</span></div></td></tr>"
+                                    /*-----------------------------------------------------------------paso 3 -----------------------------------------------*/
+                                    x1 = 0 / maximocd
+                                    r1 = r1 + "<tr><td class='Aright'>x<sub>1</sub>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + x1 + "</td></tr>"
+                                    XP1 = x1
+                                    r1 = r1 + "</table>"
+                                    r1 = r1 + "<br><br>"
+                                    r1 = r1 + "<span class='izquierda'>Para <span class='strong'> x<sub>2</sub> :</span></span>"
+                                    r1 = r1 + "<br><br>" //---------------------------------------------------------------> 2 parte
+                                    r1 = r1 + "<center><table class='tableecu'>"
+                                    /*-----------------------------------------------------------------paso 1 -----------------------------------------------*/
+                                    if (productoA == 1 || productoA == -1) {/*-----------------------------------------------------caso de que sea solo x*/
+                                        if (productoA == 1) { productoA = "x" } else if (productoA == -1) { productoA = "-x" }
+                                        if (productoB < 0) { productoB1 = productoB * (-1) } else { productoB1 = parseInt(productoB) }
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + ""
+                                        r1 = r1 + "" + signo1 + "" + productoB1 + ""
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "</td></tr>"
+                                        /*-----------------------------------------------------------------paso 2 -----------------------------------------------*/
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + ""
+                                        r1 = r1 + "" + signo1 + "" + productoB1 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span>"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 3 -----------------------------------------------*/
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + "<span class='rojo'> + </span> 0"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 4 -----------------------------------------------*/
+                                        productoB = Math.abs(productoB)
+                                        if (banderaB < 0) {
+                                            x2 = 0 + productoB
+                                        } else if (banderaB > 0) {
+                                            if (banderaB < 0) {
+                                                x2 = 0 + productoB
+                                            } else if (banderaB > 0) {
+                                                x2 = 0 - productoB
+                                            }
+                                        }
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + "<sub>2</sub>"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + x2 + "</span></td></tr>"
+                                        XS1 = x2
+                                        if (productoA == "-x") {
+                                            r1 = r1 + "<tr><td class='Aright'>(<span class='blue'>-1</span>) (" + productoA + ")"
+                                            r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>(<span class='blue'>-1</span>) (" + x2 + ")</span></td></tr>"
+                                            productoA = "x"
+                                            r1 = r1 + "<tr><td class='Aright'>" + productoA + "<sub>2</sub>"
+                                            r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + x2 * (-1) + "</span></td></tr>"
+                                            XS1 = x2 * -1
+                                        }
+                                    } else {/*----------------------------caso de que no sea x*/
+                                        if (productoB < 0) { productoB1 = productoB * (-1) } else { productoB1 = parseInt(productoB) }
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + " x"
+                                        r1 = r1 + "" + signo1 + "" + productoB1 + ""
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "</td></tr>"
+                                        //-----------------------------------------------------------------paso 2 ----------------------------------------------- 
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + " x"
+                                        r1 = r1 + "" + signo1 + "" + productoB1 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span>"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 3 -----------------------------------------------*/
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + " x<span class='rojo'> + </span> 0"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + 0 + "" + signo2 + "<span class='blue'>" + productoB1 + "</span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 4 -----------------------------------------------*/
+                                        if (banderaB < 0) {
+                                            Rx = productoB * (-1)
+                                        } else if (banderaB > 0) {
+                                            if (banderaB < 0) {
+                                                Rx = productoB * (-1)
+                                            } else if (banderaB > 0) {
+                                                Rx = productoB * (-1)
+                                            }
+                                        }
+                                        r1 = r1 + "<tr><td class='Aright'>" + productoA + " x"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'>" + Rx + "</span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 5 -----------------------------------------------*/
+                                        r1 = r1 + "<tr><td class='Aright'>"
+                                        r1 = r1 + "<div class='fraction'><span class='fup'>" + productoA + " x</span><span class='bar'></span><span class='fdn blue'>" + productoA + "</span></div>"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction'><span class='fup'>" + Rx + "</span><span class='bar'></span><span class='fdn blue'>" + productoA + "</span></div></span></td></tr>"
+                                        /*-----------------------------------------------------------------paso 6 -----------------------------------------------*/
+                                        x2 = Rx / productoA
+                                        /*MCD++++++++++++++++++++++++++*/
+                                        valor1 = Rx;
+                                        valor2 = productoA;
+                                        valor1 = Math.abs(valor1);
+                                        valor2 = Math.abs(valor2);
+                                        maximocd1 = MCD(valor1, valor2);
+                                        V1 = valor1 / maximocd1;
+                                        V2 = valor2 / maximocd1;
+                                        /*++++++++++++++++++++++++++MCD*/
+                                        if (maximocd1 != 1) {
+                                            r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                            r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction green'><span class='fup'>" + Rx + "</span><span class='bar'></span><span class='fdn'>" + productoA + "</span></div></span></td></tr>"
+                                            r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                            r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction green'><span class='fup'>" + signoN(V1) + "</span><span class='bar'></span><span class='fdn'>" + signoD(V2) + "</span></div></span></td></tr>"
+                                            XS1 = signoN(V1)
+                                            XS2 = signoD(V2)
+                                        } else if (x2 % 1 == 0) {
+                                            r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                            r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft green'>" + x2 + "</span></td></tr>"
+                                            XS1 = x2
+                                        } else {
+                                            if (Rx < 0 && productoA < 0) {
+                                                r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction green'><span class='fup'>" + Rx + "</span><span class='bar'></span><span class='fdn'>" + productoA + "</span></div></span></td></tr>"
+                                                r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction green'><span class='fup'>" + Rx * (-1) + "</span><span class='bar'></span><span class='fdn'>" + productoA * (-1) + "</span></div></span></td></tr>"
+                                                XS1 = Rx * (-1)
+                                                XS2 = productoA * (-1)
+                                            } else {
+                                                r1 = r1 + "<tr><td class='Aright'>x<sub>2</sub>"
+                                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class = 'Aleft'><div class='fraction green'><span class='fup'>" + Rx + "</span><span class='bar'></span><span class='fdn'>" + productoA + "</span></div></span></td></tr>"
+                                                XS1 = Rx
+                                                XS2 = productoA
+                                            }
+                                        }
+                                    }
+                                    r1 = r1 + "</table>"
+                                    r1 = r1 + "Las raíces obtenidas son:"
+                                    r1 = r1 + "<center><table class='tableecu'>"
+                                    r1 = r1 + "<td class='Aright'><span class='cursiva'>x<sub>1</sub></span></td><td><span class='rojo'>=</span></td>";
+                                    r1 = r1 + "<td class='Aleft green'>" + XP1 + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>"
+                                    if (productoA == 1) {
+                                        r1 = r1 + "<td class='Aright'><span class='cursiva'>x<sub>2</sub></span></td><td><span class='rojo'>=</span></td>";
+                                        r1 = r1 + "<td class='Aleft green'>" + XS1 + "</td></tr>"
+                                    } else {
+                                        if (x2 % 1 == 0) {
+                                            r1 = r1 + "<td class='Aright'><span class='cursiva'>x<sub>2</sub></span></td><td><span class='rojo'>=</span></td>";
+                                            r1 = r1 + "<td class='Aleft green'>" + XS1 + "</td></tr>"
+                                        } else {
+                                            r1 = r1 + "<td class='Aright'><span class='cursiva'>x<sub>2</sub></span></td><td><span class='rojo'>=</span></td><td class='Aleft'>";
+                                            r1 = r1 + "<div class='fraction green'><span class='fup'>" + XS1 + ""
+                                            r1 = r1 + "</span></span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div></td></tr>"
+                                        }
+                                    }
+                                    r1 = r1 + "</table>"
+                                    r1 = r1 + "<br><p class='boton' id='Bcomprobacion' onclick='comprobacion()'>Comprobación</p>";
+                                    r1 = r1 + "<a href='app5.html'>";
+                                    r1 = r1 + "<i class='boton-despla fa fa-arrow-circle-o-left'></i></a>";
+                                    r1 = r1 + "<a href='app7.html'>";
+                                    r1 = r1 + "<i class='boton-despla fa fa-arrow-circle-o-right'></i></a>";
+                                    $("#resultado").html(r1);
+                                    $("#comprobacion").html("");
+                                    compro();
+                                }
+                            }
+                            function comprobacion() {
+                                if (b < 0) { b = b * (-1) } else { b = parseInt(b) }
+                                r1 = "<br>Sustituyendo en la ecuación el valor de :<br><span class='cursiva'>x<sub>1</sub></span><span class='rojo'> = </span>"
+                                r1 = r1 + "<span class='green'>" + XP1 + "</span>"
+                                r1 = r1 + "<br><center><table class='tableecu'><tr>"
+                                /*--------------------------------------------------------paso 1--------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>" + a + " x<sup>2</sup>"
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>" + b + ""
+                                r1 = r1 + " x</td><td><span class='rojo'> = </span></td><td class = 'Aleft'> 0 </td></tr>"
+                                /*-----------------------------------------------------paso 2---------------------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>"
+                                r1 = r1 + "(" + a + ")(<span class='green'>" + XP1 + "</span>)<sup>2</sup>"
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                r1 = r1 + "(" + b + ")(<span class='green'>" + XP1 + "</span>)"
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                /*-----------------------------------------------------paso 3---------------------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>"
+                                r1 = r1 + "(" + a + ")(<span class='green'>" + XP1 + "</span>)"
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                r1 = r1 + "(" + b + ")(<span class='green'>" + XP1 + "</span>)"
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                /*-----------------------------------------------------paso 4---------------------------------------------------------------------*/
+                                mul1 = a * XP1
+                                mul2 = b * XP1
+                                r1 = r1 + "<tr><td class='Aright'>" + mul1 + ""
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                r1 = r1 + "" + mul2 + ""
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                /*-----------------------------------------------------paso 5---------------------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>0</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                r1 = r1 + "</table>"
+                                r1 = r1 + "<span class='strong'>Como hay una igualdad, entonces x<sub>1</sub> satisface a la ecuación dada</span><br><br>"
+                                /*SEGUNDA COMPROBACION CON LA RAIZ X2*/
+                                r1 = r1 + "<br>Sustituyendo en la ecuación el valor de :<br><span class='cursiva'>x<sub>2</sub></span><span class='rojo'> = </span>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "<span class='green'>" + XS1 + "</span>"
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "<span class='green'>" + XS1 + "</span>"
+                                    } else {
+                                        r1 = r1 + "<div class='fraction green'><span class='fup'>" + XS1 + "</span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div>"
+                                    }
+                                }
+                                r1 = r1 + "<br><center><table class='tableecu'><tr>"
+                                /*--------------------------------------------------------paso 1--------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>" + a + " x<sup>2</sup>"
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>" + b + ""
+                                r1 = r1 + " x</td><td><span class='rojo'> = </span></td><td class = 'Aleft'> 0 </td></tr>"
+                                /*-----------------------------------------------------paso 2---------------------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "(" + a + ")(<span class='green'>" + XS1 + "</span>)<sup>2</sup>"
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "(" + a + ")(<span  class='green'>" + XS1 + "</span>)<sup>2</sup>"
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + a + "</span><span class='bar'>/</span><span class='fdn blue'>1</span></div><span class='corchete_right'></span> "
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction green'><span class='fup'>" + XS1 + "</span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div><span class='corchete_right'></span>  <span class='potenciaF'>2</span>&nbsp;"
+                                    }
+                                }
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "(" + b + ")(<span  class='green'>" + XS1 + "</span>)"
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "(" + b + ")(<span  class='green'>" + XS1 + "</span>)"
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + b + "</span><span class='bar'>/</span><span class='fdn blue'>1</span></div><span class='corchete_right'></span> "
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction green'><span class='fup'>" + XS1 + "</span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div><span class='corchete_right'></span>"
+                                    }
+                                }
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                /*-----------------------------------------------------paso 3---------------------------------------------------------------------*/
+                                r1 = r1 + "<tr><td class='Aright'>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "(" + a + ")(<span  class='green'>" + Math.pow(XS1, 2) + "</span>)"
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "(" + a + ")(<span  class='green'>" + Math.pow(XS1, 2) + "</span>)"
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + a + "</span><span class='bar'>/</span><span class='fdn blue'>1</span></div><span class='corchete_right'></span> "
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction green'><span class='fup'>" + Math.pow(XS1, 2) + "</span><span class='bar'>/</span><span class='fdn'>" + Math.pow(XS2, 2) + "</span></div><span class='corchete_right'></span>"
+                                    }
+                                }
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "(" + b + ")(<span  class='green'>" + XS1 + "</span>)"
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "(" + b + ")(<span  class='green'>" + XS1 + "</span>)"
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + b + "</span><span class='bar'>/</span><span class='fdn blue'>1</span></div><span class='corchete_right'></span> "
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction green'><span class='fup'>" + XS1 + "</span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div><span class='corchete_right'></span>"
+                                    }
+                                }
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                /*-----------------------------------------------------paso 4---------------------------------------------------------------------*/
+                                potencia = Math.pow(XS1, 2)
+                                mul1 = a * potencia
+                                mul2 = b * XS1
+                                r1 = r1 + "<tr><td class='Aright'>"
+                                if (productoA == 1) {
+                                    r1 = r1 + "" + mul1 + ""
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        r1 = r1 + "" + mul1 + ""
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + mul1 + "</span><span class='bar'>/</span><span class='fdn'>" + Math.pow(XS2, 2) + "</span></div><span class='corchete_right'></span>"
+                                    }
+                                }
+                                r1 = r1 + "<span class='rojo'>" + signo + "</span>"
+                                if (productoA == 1) {
+                                    if (mul2 < 0) { r1 = r1 + "(" + mul2 + ")" } else { r1 = r1 + "" + mul2 + "" }
+                                } else {
+                                    if (x2 % 1 == 0) {
+                                        if (mul2 < 0) { r1 = r1 + "(" + mul2 + ")" } else { r1 = r1 + "" + mul2 + "" }
+                                    } else {
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + mul2 + "</span><span class='bar'>/</span><span class='fdn'>" + XS2 + "</span></div><span class='corchete_right'></span>"
+                                    }
+                                }
+                                r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                r1 = r1 + "0</td></tr>"
+                                if (x2 % 1 == 0) {
+                                    if (mul2 < 0) {
+                                        b = document.getElementById("b").value;
+                                        if (b < 0) { ley_signo = "<span class='rojo'> + </span>" } else { ley_signo = "<span class='rojo'> - </span>" }
+                                        /*-----------------------paso 5-----------------------*/
+                                        r1 = r1 + "<tr><td class='Aright'>"
+                                        r1 = r1 + "" + mul1 + ""
+                                        r1 = r1 + "<span class='rojo'>" + ley_signo + "</span>"
+                                        if (mul2 < 0) { r1 = r1 + "" + mul2 * (-1) + "" } else { r1 = r1 + "" + mul2 + "" }
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>"
+                                        r1 = r1 + "0</td></tr>"
+                                    }
+                                    /*---------------------paso 6-------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>0"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>" /*---------------final de los enteros*/
+                                    r1 = r1 + "0</td></tr>"
+                                } else { /*---------------continua fraccion*/
+                                    /*---------------------paso 5-------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>"
+                                    r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>(" + mul1 + ")(" + XS2 + ")"
+                                    r1 = r1 + "" + signo + ""
+                                    r1 = r1 + "(" + mul2 + ")(" + Math.pow(XS2, 2) + ")</span><span class='bar'>/</span><span class='fdn'>(" + Math.pow(XS2, 2) + ")(" + XS2 + ")</span></div><span class='corchete_right'></span>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                    /*---------------------paso 6-------------------------*/
+                                    potencia = Math.pow(XS2, 2)
+                                    mul3 = mul1 * XS2
+                                    mul4 = mul2 * potencia
+                                    mul5 = XS2 * potencia
+                                    r1 = r1 + "<tr><td class='Aright'>"
+                                    r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + mul3 + ""
+                                    r1 = r1 + "" + signo + ""
+                                    if (mul4 < 0) { r1 = r1 + "(" + mul4 + ")" } else { r1 = r1 + "" + mul4 + "" }
+                                    r1 = r1 + "</span><span class='bar'>/</span><span class='fdn'>" + mul5 + "</span></div><span class='corchete_right'></span>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                    /*---------------------paso 7-------------------------*/
+                                    if (mul4 < 0) {
+                                        b = document.getElementById("b").value;
+                                        if (b < 0) { ley_signo = "<span class='rojo'> + </span>" } else { ley_signo = "<span class='rojo'> - </span>" }
+                                        r1 = r1 + "<tr><td class='Aright'>"
+                                        r1 = r1 + "<span class='corchete_left'></span><div class='fraction'><span class='fup'>" + mul3 + ""
+                                        r1 = r1 + "" + ley_signo + ""
+                                        if (mul4 < 0) { r1 = r1 + "" + mul4 * (-1) + "" } else { r1 = r1 + "" + mul4 + "" }
+                                        r1 = r1 + "</span><span class='bar'>/</span><span class='fdn'>" + mul5 + "</span></div><span class='corchete_right'></span>"
+                                        r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                    }
+                                    /*---------------------paso 8-------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>"
+                                    r1 = r1 + "<div class='fraction'><span class='fup'>0"
+                                    r1 = r1 + "</span><span class='bar'>/</span><span class='fdn'>" + mul5 + "</span></div>"
+                                    r1 = r1 + "</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                    /*---------------------paso 9-------------------------*/
+                                    r1 = r1 + "<tr><td class='Aright'>0</td><td><span class='rojo'> = </span></td><td class='Aleft'>0</td></tr>"
+                                }
+                                r1 = r1 + "</table>"
+                                r1 = r1 + "<span class='strong'>Como hay una igualdad, entonces x<sub>2</sub> satisface a la ecuación dada</span><br><br>"
+                                r1 = r1 + "<a href='app5.html'>";
+                                r1 = r1 + "<i class='boton-despla fa fa-arrow-circle-o-left'></i></a>";
+                                r1 = r1 + "<i class='boton-despla fa fa-arrow-circle-o-up' id='Binicio'></i>";
+                                r1 = r1 + "<a href='app7.html'>";
+                                r1 = r1 + "<i class='boton-despla fa fa-arrow-circle-o-right'></i></a>";
+                                $("#comprobacion").html(r1);
+                                ini();
+                            }
+                        </script>
+                        <style type="text/css">
+                            * {
+                                margin: 0px;
+                                padding: 0px;
+                                -webkit-box-sizing: border-box;
+                                -moz-box-sizing: border-box;
+                                box-sizing: border-box;
+                            }
+                            .diferente {
+                                font-size: 1.2em !important;
+                            }
+                            .tableecu {
+                                margin-bottom: 0px;
+                                border-collapse: collapse;
+                                border: 1px red;
+                            }
+                            .Aleft {
+                                text-align: left;
+                            }
+                            .Aright {
+                                text-align: right;
+                            }
+                            td {
+                                text-align: center;
+                                padding: 0px 3px !important;
+                                margin: 0px !important;
+                                height: 10px;
+                                font-size: 2em;
+                                font-family: 'Arima Madurai';
+                            }
+                            .boton {
+                                max-width: 130px;
+                                height: auto;
+                                padding: 5px 10px;
+                                margin: 0px;
+                                background: #ccc;
+                                cursor: pointer;
+                                border-radius: 15px;
+                                border: 3px solid #ccc;
+                            }
+                            .boton:hover {
+                                border: 3px solid white;
+                            }
+                            .boton-despla {
+                                font-size: 2.8em;
+                                cursor: pointer;
+                                margin: 5px;
+                                padding: 5px 15px;
+                                color: rgb(29, 185, 84);
+                            }
+                            .logo {
+                                font-size: red;
+                            }
+                            .signos {
+                                position: absolute;
+                                font-size: 16px;
+                                text-align: center;
+                                visibility: hidden;
+                                width: auto;
+                                height: auto;
+                                margin: auto;
+                                display: initial;
+                            }
+                            .signos .text-recuerdo {
+                                color: red;
+                                text-align: center;
+                                margin: 5px auto;
+                                margin-bottom: 10px;
+                                width: 100%;
+                                color: #000;
+                            }
+                            .question {
+                                margin: 5px;
+                                cursor: pointer;
+                            }
+                            .signos .cont-recu {
+                                background: #fff;
+                                max-width: 245px;
+                                margin: auto;
+                                padding: 15px;
+                                border: 2px dotted black;
+                            }
+                            .corchete_left {
+                                font-size: 70px;
+                                font-weight: lighter !important;
+                                font-family: "Courier New", Courier !important;
+                                bottom: 0px;
+                                padding-left: 5px !important;
+                                margin: 0px !important;
+                                border-left: 2px solid rgba(0, 0, 0, .6);
+                                ;
+                                width: 12px;
+                                height: 18px;
+                                border-radius: 50%;
+                            }
+                            .corchete_right {
+                                font-size: 70px;
+                                font-weight: lighter !important;
+                                font-family: "Courier New", Courier !important;
+                                bottom: 0px;
+                                padding-right: 5px !important;
+                                margin: 0px !important;
+                                border-right: 2px solid rgba(0, 0, 0, .6);
+                                ;
+                                width: 12px;
+                                height: 18px;
+                                border-radius: 50%;
+                            }
+                            .mini {
+                                font-size: 46px !important;
+                                padding: 3px !important;
+                            }
+                            .strikethrough {
+                                position: relative;
+                            }
+                            .strikethrough:before {
+                                position: absolute;
+                                content: "";
+                                left: 0;
+                                top: 50%;
+                                right: 0;
+                                border-top: 1px solid;
+                                border-color: red;
+                                -webkit-transform: rotate(-50deg);
+                                -moz-transform: rotate(-50deg);
+                                -ms-transform: rotate(-50deg);
+                                -o-transform: rotate(-50deg);
+                                transform: rotate(-50deg);
+                            }
+                            .fraction {
+                                display: inline-block;
+                                vertical-align: middle;
+                                margin: 0 0.2em 0.4ex;
+                                text-align: center;
+                            }
+                            .fraction>span {
+                                display: block;
+                                padding-top: 0.15em;
+                            }
+                            .fraction span.fdn {
+                                border-top: thin solid black;
+                            }
+                            .fraction span.bar {
+                                display: none;
+                            }
+                            .strong {
+                                font-weight: bold;
+                            }
+                            /*.p1{
+  float: left;
+  width: 48%;
+  margin-right:2%;
+}
+.p2{
+  float: right;
+  width: 48%;
+  margin-right:2%;
+}
+*/
+                            @media screen and (max-width: 360px) {
+                                .ecu {
+                                    font-size: 1.4em !important;
+                                }
+                                .Aright,
+                                .Aleft {
+                                    font-size: 1.4em !important;
+                                }
+                                .corchete {
+                                    font-size: 15px;
+                                }
+                                .potenciaF {
+                                    font-size: 12px !important;
+                                }
+                                .corchete_right_B {
+                                    font-size: 35px !important;
+                                }
+                                .corchete_left_B {
+                                    font-size: 35px !important;
+                                }
+                            }
+                            @media screen and (max-width: 360px) {
+                                .corchete_right {
+                                    padding-right: 3px;
+                                    font-size: 30px;
+                                }
+                                .corchete_left {
+                                    padding-left: 3px;
+                                    font-size: 30px;
+                                }
+                                .mini {
+                                    font-size: 25px !important;
+                                }
+                                hr {
+                                    width: 100%;
+                                }
+                                .potenciaF {
+                                    font-size: 12px !important;
+                                }
+                                .corchete_right_B {
+                                    font-size: 35px !important;
+                                }
+                                .corchete_left_B {
+                                    font-size: 35px !important;
+                                }
+                            }
+                            @media screen and (max-width:440px) {
+                                .ecuacion input[type="number"] {
+                                    width: 35px !important;
+                                    ;
+                                }
+                            }
+                            .circulo-signo {
+                                border: 2px solid white;
+                                border-radius: 0.8em;
+                                -moz-border-radius: 0.8em;
+                                -webkit-border-radius: 0.8em;
+                                color: blue;
+                                display: inline-block;
+                                font-weight: bold;
+                                line-height: 1em;
+                                margin-right: 10px;
+                                text-align: center;
+                                width: 1.1em;
+                                font-size: 0.7cm;
+                                font-family: Serif;
+                                margin-top: -line-height/2;
+                            }
+                            .potenciaF {
+                                position: absolute;
+                                font-size: 20px;
+                                text-align: center;
+                                width: auto;
+                                height: auto;
+                                margin: auto;
+                                display: initial;
+                            }
+                            .izquierda {
+                                position: absolute;
+                                /*float: left;*/
+                                left: 40%;
+                                /*position: absolute;*/
+                            }
+                        </style>
+                    <p style="font-size: 1.1em;">Elige los valores de <span class='cursiva'>ax<sup>2</sub></span>, <span
+                            class='cursiva'>bx</span> para la ecuación del sistema de acuerdo al nivel.
+                    </p><br>
+                    <div class="ecuacion">
+                        <input type="number" onclick="invalid()" placeholder="a" id="a" name="a" required> x<sup>2</sup>
+                        <span class="rojo"> + </span>
+                        <input type="number" onclick="invalid()" placeholder="b" id="b" name="b" required> x
+                        <!-- <span class="rojo"> + </span> -->
+                        <!-- <input class="inputecu" onclick="invalid()" type="tel" placeholder="c" id="c" name="c" required> -->
+                        <span class="rojo"> = </span> 0
+                        <!-- <span class="rojo"> 0 </span> -->
+                        </span>
+                    </div>
+                    <div class="ecuacion"><i class="submit-btn-ecu hvr-grow fa fa-hand-pointer-o" id="validar"
+                            onclick="validar()"></i></div>
+                    <p id="leyenda"> </p>
+                    <p id="aviso"> </p>
+                    <p id="resultado"></p>
+                    <p id="comprobacion"></p>
+                    </p>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ax2+bx+c=0</string>
+    <string name="title_activity_main">ax2+bx+c=0</string>
+    <string name="package_name">mate365.mx.app5</string>
+    <string name="custom_url_scheme">mate365.mx.app5</string>
+</resources>

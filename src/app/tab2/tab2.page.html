@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar class="toolbar">
+    <ion-title>
+      App ax² + bx + c
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="animate__animated animate_fadeIn ion-padding">
+  <div style="margin-bottom: 5px;"></div>
+  <ion-item style="margin-bottom: 5px;" detail="false" class="bg-cont animate__animated animate__fadeIn animate__fast"
+    *ngFor="let item of data; let i = index" lines="full" [routerLink]="item.link">
+    
+    <ion-avatar class="avatar" slot="start">
+      <ion-icon name="school-outline"></ion-icon>
+    </ion-avatar>
+
+    <ion-label class="ion-text-wrap">
+
+      <h2 class="header-label">
+        <span class="monserrat" [innerHTML]="">
+          <span class="monserrat"> Nivel {{i + 1 }}</span>
+        </span>
+      </h2>
+
+      <small class="txt-level mon-reg">
+        <div class="mon-reg"   [innerHTML]="item.titulo" ></div>
+      </small>
+
+    </ion-label>
+  </ion-item>
+
+</ion-content>

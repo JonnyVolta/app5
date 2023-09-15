@@ -1,0 +1,18 @@
+<ion-content id="welcome" class="animate__animated animate_fadeIn">
+  <ion-slides  #slider pager="ios" class="slide-full">
+    <ion-slide *ngFor="let slide of slides" class="animate__animated animate__fadeIn">
+    <ion-card>
+      <img [src]="slide.img" class="slide-image">
+      <ion-card-header>
+        <ion-card-subtitle>{{slide.titulo}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <span [innerHTML]=" slide.desc "></span>
+      </ion-card-content>      
+    </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-button (click)="goToDashboard()" mode="ios">Comenzar</ion-button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>  

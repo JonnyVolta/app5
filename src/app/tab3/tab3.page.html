@@ -1,0 +1,18 @@
+<ion-header class="ion-no-border" mode="ios" translucent>
+  <ion-toolbar  >
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/tabs/tab2"
+        text= "" >
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>Nivel <span *ngIf="level !== 0" >{{level}}</span></ion-title>
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">   
+  <iframe  (load)="uploadDone($event)"  *ngIf="frame" class="card" [src]="link"
+  frameborder="0" width="100%" height="100%"> </iframe>
+   
+</ion-content>

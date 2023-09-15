@@ -1,0 +1,7 @@
+{
+  "name": "ax2+bx+c=0",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
